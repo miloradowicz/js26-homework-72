@@ -1,6 +1,6 @@
 import { AppBar, Link, Stack, Toolbar, Typography } from '@mui/material';
 import { FC } from 'react';
-import { Link as RouterLink, NavLink as RouterNavLink } from 'react-router-dom';
+import { NavLink as NavLink } from 'react-router-dom';
 
 interface Props {
   title: string;
@@ -12,24 +12,18 @@ interface Props {
 
 const AdminHeader: FC<Props> = ({ title, links }) => {
   return (
-    <AppBar>
+    <AppBar position='static'>
       <Toolbar component='nav' sx={{ justifyContent: 'space-between' }}>
-        <Typography
-          variant='h6'
-          component={RouterLink}
-          color='white'
-          sx={{ textDecoration: 'none' }}
-          to='/'
-        >
+        <Typography variant='h6' color='white' sx={{ textDecoration: 'none' }}>
           {title}
         </Typography>
-        <Stack direction='row'>
+        <Stack direction='row' gap={3}>
           {links?.map((x, i) => (
             <Link
               key={i}
               underline='hover'
               color='inherit'
-              component={RouterNavLink}
+              component={NavLink}
               to={x.url}
             >
               {x.title}
