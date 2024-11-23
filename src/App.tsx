@@ -17,7 +17,8 @@ function App() {
       </Route>
       <Route path='admin' element={<AdminLayout />}>
         <Route index element={<Dishes />} />
-        <Route path='dishes' element={<Dishes />}>
+        <Route path='dishes'>
+          <Route index element={<Dishes />} />
           <Route path='new' element={<NewDish />} />
           <Route path='edit/:id' element={<EditDish />} />
         </Route>
