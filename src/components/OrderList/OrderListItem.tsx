@@ -27,7 +27,7 @@ const OrderListItem: FC<Props> = ({ order, completeAction }) => {
 
           if (i) {
             return (
-              <Grid container>
+              <Grid key={x.id} container>
                 <Grid size={8} sx={{ display: 'flex', alignItems: 'center' }}>
                   <Typography marginRight={2} component='span'>
                     {i.title}

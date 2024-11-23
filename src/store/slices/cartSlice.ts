@@ -8,7 +8,12 @@ interface CartState {
 }
 
 const initialState: CartState = {
-  cart: [],
+  cart: [
+    {
+      id: '---',
+      qty: 1,
+    },
+  ],
 };
 
 const cartSlice = createSlice({
@@ -36,12 +41,12 @@ const cartSlice = createSlice({
       }
     },
     emptyCart: (state) => {
-      state.cart = [];
+      state.cart = initialState.cart;
     },
   },
 });
 
 export const cartReducer = cartSlice.reducer;
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, emptyCart } = cartSlice.actions;
 
 export const selectCart = (store: RootState) => store.cartReducer.cart;

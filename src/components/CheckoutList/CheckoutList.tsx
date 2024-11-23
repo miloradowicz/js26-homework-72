@@ -24,13 +24,14 @@ const CheckoutList: FC<Props> = ({ dishes, cart }) => {
               key={x.id}
               title={i.title}
               price={i.price}
-              qty={x.qty}
-              onDelete={() => dispatch(removeItem(x.id))}
+              qty={x.id !== '---' ? x.qty : undefined}
+              onDelete={
+                x.id !== '---' ? () => dispatch(removeItem(x.id)) : undefined
+              }
             />
           );
         }
       })}
-      {cart.length && <CheckoutListItem title='Delivery' price={150} />}
     </Box>
   );
 };

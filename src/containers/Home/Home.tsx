@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import CheckoutList from '@/components/CheckoutList/CheckoutList';
 import DishList from '@/components/DishList/DishList';
 import UserFooter from '@/components/UserFooter/UserFooter';
-import { addItem, selectCart } from '@/store/slices/cartSlice';
+import { addItem, emptyCart, selectCart } from '@/store/slices/cartSlice';
 import { selectDishes } from '@/store/slices/dishesSlice';
 import { syncAllDishes } from '@/store/thunks/dishesThunks';
 import { createOrder } from '@/store/thunks/ordersThunks';
@@ -35,15 +35,19 @@ const Home = () => {
     setIsModalOpen(false);
   };
 
-  const placeOrder = () => {
-    dispatch(createOrder({ items: cart }));
+  const placeOrder = async () => {
     closeModal();
+    await dispatch(createOrder({ items: cart }));
+    dispatch(emptyCart());
   };
 
   return (
     <>
       <Container sx={{ p: 2 }}>
-        <DishList dishes={dishes} defaultAction={defaultAction} />
+        <DishList
+          dishes={dishes.filter((x) => x.id !== '---')}
+          defaultAction={defaultAction}
+        />
         <Modal open={isModalOpen} onClose={closeModal}>
           <Box
             sx={{

@@ -2,9 +2,9 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import DishList from '@/components/DishList/DishList';
 import { selectDeleteLoading, selectDishes } from '@/store/slices/dishesSlice';
 import { deleteDish, syncAllDishes } from '@/store/thunks/dishesThunks';
-import { Container } from '@mui/material';
+import { Box, Button, Container } from '@mui/material';
 import { useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Dishes = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +50,15 @@ const Dishes = () => {
 
   return (
     <Container sx={{ p: 2 }}>
-      <DishList dishes={dishes} extraActions={extraActions} />
+      <Box>
+        <Button component={Link} to='/admin/dishes/new'>
+          Add new dish
+        </Button>
+      </Box>
+      <DishList
+        dishes={dishes.filter((x) => x.id !== '---')}
+        extraActions={extraActions}
+      />
     </Container>
   );
 };
